@@ -13,3 +13,5 @@ pip install -r requirements.txt
 python manage.py migrate
 
 python manage.py runserver
+
+Goto: http://localhost:8000
