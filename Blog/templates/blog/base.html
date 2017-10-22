@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>My blog</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <body>
+    <section id="Create-Blog">
+        {% if user.is_authenticated %}
+            <a class="btn-add-new-post" href="{% url 'post_new' %}"><span class="glyphicon glyphicon-plus" style="font-size: 200%"></span></a>
+        {% else %}
+            <span class="btn bn-danger btn-add-new-post" style="color: red"><p>SignIn to add new blog</p></span>
+        {% endif %}
+</section>
+        <div class="page-header">
+                <div class="collapse navbar-collapse" id="we-are-borg-navbar">
+                    <h1 class="pull-left"><a href="/">My Blog</a></h1>
+                  <ul class="nav navbar-nav pull-right">
+                    {% if user.is_authenticated %}
+                      <li><a href="">Welcome {{ user.username }}</a></li>
+                      <li><a href="accounts/logout/">SignOut</a></li>
+                    {% else %}
+                      <li><a href="accounts/login/">SignIn</a></li>
+                    {% endif %}
+                  </ul>
+                </div>
+        </div>
+
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
